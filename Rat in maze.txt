@@ -1,0 +1,81 @@
+#include<bits/stdc++.h>
+using namespace std;
+typedef long long ll;
+bool safe(int n, int** arr,int x, int y){
+	if (x<n && y<n && arr[x][y]==1){
+		return true;
+	}
+	return false;
+}
+bool rec(int n, int** arr,int x, int y,int** sol){
+	if (x==n-1 && y==n-1){
+		sol[x][y]=1;
+		return true;
+	}
+
+	if (safe(n,arr,x,y)){
+		sol[x][y]=1;
+		if (rec(n,arr,x+1,y,sol)){
+			return true;
+		}
+		if (rec(n,arr,x,y+1,sol)){
+			return true;
+		}
+		sol[x][y]=0;
+		return false;
+	}
+	sol[x][y]=0;
+	return false;
+
+	
+}
+
+void solve(){
+	int n;
+	cin>>n;
+	int** arr= new int*[n];
+	for (int i = 0; i < n; i++)
+	{
+		arr[i]=new int[n];
+	}
+	int** sol=new int* [n];
+	for (int i = 0; i < n; i++)
+	{
+		sol[i]=new int[n];
+	}
+	for (int i = 0; i < n; i++)
+	{
+		for (int j = 0; j < n; j++)
+		{
+			cin>>arr[i][j];
+		}
+	}
+
+	for (int i = 0; i < n; i++)
+	{
+		for (int j = 0; j < n; j++)
+		{
+			sol[i][j]=0;
+		}
+	}
+
+
+	if (rec(n,arr,0,0,sol)){
+		for (int i = 0; i < n; i++)
+		{
+			for (int j=0;j<n;j++){
+				cout<<sol[i][j]<<" ";
+			}cout<<endl;
+		}
+		
+	}
+
+}
+int main(){
+	int t;
+	cin>>t;
+	while(t--){
+		solve();
+	}
+
+}

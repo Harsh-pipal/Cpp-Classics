@@ -1,0 +1,35 @@
+#include<bits/stdc++.h>
+using namespace std;
+typedef long long ll;
+//#define rep(i,a,b) for(int i=a;i<b;i++);
+bool cmp(pair<int,int>&a,pair <int ,int > &b){                 /*sorting based on ending time*/
+	return (a.second <b.second);
+} 
+ 
+void solve(){
+	ll n;
+	cin>>n;
+	ll ans=0;
+	ll sol=0;
+	vector<pair<int,int>>v;
+	for(int i=0;i<n;i++){
+		ll a, b;
+		cin>>a>>b;
+		v.push_back({a,b});
+	}
+	sort(v.begin(),v.end(),cmp);
+	int lmt=-1;                                             /*checking if starting of next movie is after end time of current last movie*/
+	for(auto i :v){
+		if (i.first>=lmt){
+			sol++;
+			lmt=i.second;
+		}
+	}		
+	cout<<sol;
+} 
+int main(){
+	int t=1;
+	//cin>>t;
+	while(t--)
+	solve();
+}

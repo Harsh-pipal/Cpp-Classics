@@ -1,0 +1,37 @@
+#include<bits/stdc++.h>
+using namespace std;
+typedef long long ll;
+
+// subsequences or subsets using bitmasks and
+// Minimum difference problem
+
+void solve(){
+	ll n;
+	cin>>n;
+	ll arr[n];
+	ll sum=0;
+	ll ans=INT_MAX;
+	for (int i = 0; i < n; i++)
+	{
+		cin>>arr[i];
+		sum+=arr[i];
+	}
+
+	for (int i = 0; i < (1<<n); i++)
+	{
+		ll cnt=0;
+		for (int j=0 ; j < n; j++)
+		{
+			if (1<<j & i)cnt+=arr[j];
+		}
+		ans=min(ans,abs(sum-cnt-cnt));
+	}
+	cout<<ans;
+}
+
+int main(){
+	//int t=1;
+	//cin>>t;
+	//while(t--)
+	solve();
+}

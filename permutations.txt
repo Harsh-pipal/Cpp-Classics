@@ -1,0 +1,40 @@
+#include<bits/stdc++.h>
+using namespace std;
+typedef long long ll;
+//#define rep(i,a,b) for(int i=a;i<b;i++);
+vector<string>ans;
+
+void permut(string s,int ind){
+	if (ind==s.size()){
+		ans.push_back(s);
+		return;
+	}
+	for (int i = ind; i < s.size(); i++)
+	{
+		swap(s[i],s[ind]);
+		permut(s,ind+1);
+		swap(s[i],s[ind]);
+	}
+}
+void solve(){
+	string s;
+	cin>>s;
+
+	permut(s,0);
+	set<string>se;
+	for(auto i : ans){
+		se.insert(i);
+	}
+	cout<<se.size();
+	cout<<endl;
+	for(auto i: se){
+		cout<<i<<endl;
+	}
+}
+
+int main(){
+	//int t;
+	//cin>>t;
+	//while(t--)
+	solve();
+}
